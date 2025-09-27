@@ -1,12 +1,8 @@
 # Advanced Agentic RAG that Mimics Human Thought Process
 </br>
-This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.
+This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.</br>
+</br>The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
 
-</br>
-
-The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
-</br>
-</br>
 
 
 ## Project Overview
@@ -56,14 +52,14 @@ The Supervisor manages a team of four specialist tools, each designed for a spec
 ## Phase 3: The Agentic Supervisor
 This is the cognitive core of the project, implemented as a state machine using LangGraph. The Supervisor guides the agent through a sophisticated reasoning loop:
 
-- The Gatekeeper: The first node in our graph. It inspects the user's query for ambiguity. If the query is too vague, it generates a clarifying question and halts. This prevents the agent from wasting resources on poorly defined tasks.
+- **The Gatekeeper**: The first node in our graph. It inspects the user's query for ambiguity. If the query is too vague, it generates a clarifying question and halts. This prevents the agent from wasting resources on poorly defined tasks.
 
-- The Planner: Once a query is approved, the Planner creates a multi-step plan by selecting the appropriate tools in the correct sequence to answer the user's request.
+- **The Planner**: Once a query is approved, the Planner creates a multi-step plan by selecting the appropriate tools in the correct sequence to answer the user's request.
 
-- The Tool Executor: Executes the plan step-by-step, calling the designated specialist tools.
+- **The Tool Executor**: Executes the plan step-by-step, calling the designated specialist tools.
 
-- The Auditor: After each tool runs, this self-correction node reviews the output. It uses an LLM to score the result for relevance and consistency against the user's original query.
+- **The Auditor**: After each tool runs, this self-correction node reviews the output. It uses an LLM to score the result for relevance and consistency against the user's original query.
 
-- The Conditional Router: The central decision-maker. Based on the Auditor's score, the router decides what to do next. If the score is high, it continues the plan. If the score is low, it triggers a re-planning loop, sending feedback to the Planner to create a new, better strategy.
+- **The Conditional Router**: The central decision-maker. Based on the Auditor's score, the router decides what to do next. If the score is high, it continues the plan. If the score is low, it triggers a re-planning loop, sending feedback to the Planner to create a new, better strategy.
 
-- The Strategist (Synthesizer): Once all steps are successfully completed, this final node synthesizes the findings from all tool outputs into a single, comprehensive answer. Crucially, it is instructed to infer potential causal links between data points (e.g., connecting a financial trend to a documented risk) and present them as a data-grounded hypothesis.
+- **The Strategist (Synthesizer)**: Once all steps are successfully completed, this final node synthesizes the findings from all tool outputs into a single, comprehensive answer. Crucially, it is instructed to infer potential causal links between data points (e.g., connecting a financial trend to a documented risk) and present them as a data-grounded hypothesis.
