@@ -1,8 +1,8 @@
-# Advanced Agentic RAG that Mimics Human Thought Process
+# Advanced Agentic RAG for Financial Document Analysis
 </br>
 
-This project implements a sophisticated, multi-agent RAG system designed to perform **complex financial analysis**
-. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.</br>
+This project implements a sophisticated, **multi-agent RAG system that mimics human thought process**, and is designed to perform **complex financial analysis**
+. This system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.</br>
 </br>The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
 
 </br>
@@ -67,3 +67,6 @@ This is the cognitive core of the project, implemented as a state machine using 
 - **The Conditional Router**: The central decision-maker. Based on the Auditor's score, the router decides what to do next. If the score is high, it continues the plan. If the score is low, it triggers a re-planning loop, sending feedback to the Planner to create a new, better strategy.
 
 - **The Strategist (Synthesizer)**: Once all steps are successfully completed, this final node synthesizes the findings from all tool outputs into a single, comprehensive answer. Crucially, it is instructed to infer potential causal links between data points (e.g., connecting a financial trend to a documented risk) and present them as a data-grounded hypothesis.
+
+
+This prohect has been inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a
