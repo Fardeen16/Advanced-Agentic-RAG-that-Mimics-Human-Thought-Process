@@ -74,6 +74,8 @@ This is the cognitive core of the project, implemented as a state machine using 
 ### Agent working:
 <img width="1368" height="285" alt="image" src="https://github.com/user-attachments/assets/bf9f76cc-48d7-405d-aada-35bfd2d28f7d" />
 </br>
+</br>
+
 
 
 <img width="1876" height="94" alt="image" src="https://github.com/user-attachments/assets/23b79be6-fc44-4b81-b802-05e899994f3b" />
