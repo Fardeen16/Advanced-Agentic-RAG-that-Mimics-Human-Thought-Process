@@ -75,6 +75,9 @@ This is the cognitive core of the project, implemented as a state machine using 
 <img width="1368" height="285" alt="image" src="https://github.com/user-attachments/assets/bf9f76cc-48d7-405d-aada-35bfd2d28f7d" />
 </br>
 </br>
+</br>
+
+
 
 
 
