@@ -19,23 +19,27 @@ The project is broken down into three main phases:
 - Specialist Agents: Building a team of specialized tools, each with a unique analytical skill.
 
 - The Agentic Supervisor: Constructing the cognitive architecture that allows the agent to plan, reason, and self-correct.
+<br>
 
 ## Phase 1: Data Foundation
 Before any analysis can be performed, the agent needs a reliable knowledge base. This phase involves preparing two distinct types of data sources.
 
-1.1 Unstructured Data Preparation
-Source: Publicly available SEC 10-K annual reports (e.g., for Alphabet Inc.).
 
-Process: We programmatically download the full HTML submission of the latest 10-K filing. The raw HTML is then parsed using the unstructured library to intelligently partition the document into logical elements like titles, narrative text, and tables.
+#### 1.1 Unstructured Data Preparation
+- Source: Publicly available SEC 10-K annual reports (e.g., for Alphabet Inc.).
 
-Enrichment: Each chunk is then "enriched" using an LLM to generate high-quality metadata, including a concise summary, keywords, and a list of hypothetical questions the chunk could answer. This metadata is crucial for enabling powerful semantic search later on.
+- Process: We programmatically download the full HTML submission of the latest 10-K filing. The raw HTML is then parsed using the unstructured library to intelligently partition the document into logical elements like titles, narrative text, and tables.
 
-1.2 Structured Data Preparation
-Source: A CSV file containing historical, key financial metrics (e.g., quarterly revenue and net income).
+- Enrichment: Each chunk is then "enriched" using an LLM to generate high-quality metadata, including a concise summary, keywords, and a list of hypothetical questions the chunk could answer. This metadata is crucial for enabling powerful semantic search later on.
 
-Process: This data is loaded into a persistent SQLite database, providing the agent with a reliable source for factual, point-in-time lookups.
+#### 1.2 Structured Data Preparation
+- Source: A CSV file containing historical, key financial metrics (e.g., quarterly revenue and net income).
 
-Phase 2: Building the Specialist Agents
+- Process: This data is loaded into a persistent SQLite database, providing the agent with a reliable source for factual, point-in-time lookups.
+
+
+
+## Phase 2: Building the Specialist Agents
 The Supervisor manages a team of four specialist tools, each designed for a specific task:
 
 The Librarian (librarian_rag_tool): An expert in deep document retrieval. It uses an advanced three-step process (Query Optimization -> Vector Search -> Cross-Encoder Re-ranking) to find the most relevant text and table chunks from the enriched 10-K filings.
