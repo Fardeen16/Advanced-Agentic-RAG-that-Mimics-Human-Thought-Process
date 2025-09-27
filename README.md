@@ -2,9 +2,12 @@
 </br>
 This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.
 </br>
+
 The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
 </br>
 </br>
+
+
 ## Project Overview
 The core of this project is an agentic system built with LangChain and LangGraph. It employs a "Supervisor" model that manages a team of specialized AI "analysts." When a user submits a query, the system doesn't just find an answer; it creates a multi-step plan, executes it, audits the results of each step, and can even re-plan if its initial approach fails. This enables it to handle complex, multi-part questions that would cause a standard RAG pipeline to fail.
 </br>
