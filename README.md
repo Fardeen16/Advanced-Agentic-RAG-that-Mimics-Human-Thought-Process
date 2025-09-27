@@ -1,21 +1,22 @@
 # Advanced Agentic RAG that Mimics Human Thought Process
 </br>
-This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article "[Building an Advanced Agentic RAG Pipeline](https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a)", this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.
-
+This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.
+</br>
 The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
-
-Project Overview
+</br>
+</br>
+## Project Overview
 The core of this project is an agentic system built with LangChain and LangGraph. It employs a "Supervisor" model that manages a team of specialized AI "analysts." When a user submits a query, the system doesn't just find an answer; it creates a multi-step plan, executes it, audits the results of each step, and can even re-plan if its initial approach fails. This enables it to handle complex, multi-part questions that would cause a standard RAG pipeline to fail.
-
+</br>
 The project is broken down into three main phases:
 
-Data Foundation: Preparing and enriching both unstructured and structured financial data.
+- Data Foundation: Preparing and enriching both unstructured and structured financial data.
 
-Specialist Agents: Building a team of specialized tools, each with a unique analytical skill.
+- Specialist Agents: Building a team of specialized tools, each with a unique analytical skill.
 
-The Agentic Supervisor: Constructing the cognitive architecture that allows the agent to plan, reason, and self-correct.
+- The Agentic Supervisor: Constructing the cognitive architecture that allows the agent to plan, reason, and self-correct.
 
-Phase 1: Data Foundation
+## Phase 1: Data Foundation
 Before any analysis can be performed, the agent needs a reliable knowledge base. This phase involves preparing two distinct types of data sources.
 
 1.1 Unstructured Data Preparation
