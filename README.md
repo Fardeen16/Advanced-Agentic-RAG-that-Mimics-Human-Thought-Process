@@ -2,7 +2,7 @@
 </br>
 This project implements a sophisticated, multi-agent RAG (Retrieval-Augmented Generation) system designed to perform complex financial analysis. Inspired by the advanced techniques detailed in the article https://levelup.gitconnected.com/building-an-advanced-agentic-rag-pipeline-that-mimics-a-human-thought-process-687e1fd79f61#811a, this system goes beyond simple Q&A to mimic a human analyst's thought process, featuring cognitive loops for planning, self-correction, and insight generation.
 
-</br>
+<br>
 
 The agent can intelligently query both unstructured documents (like SEC 10-K filings) and structured data (financial metrics), access real-time information from the web, and synthesize its findings into a coherent, insightful narrative.
 </br>
@@ -36,31 +36,34 @@ Before any analysis can be performed, the agent needs a reliable knowledge base.
 - Source: A CSV file containing historical, key financial metrics (e.g., quarterly revenue and net income).
 
 - Process: This data is loaded into a persistent SQLite database, providing the agent with a reliable source for factual, point-in-time lookups.
-
+</br>
 
 
 ## Phase 2: Building the Specialist Agents
 The Supervisor manages a team of four specialist tools, each designed for a specific task:
 
-The Librarian (librarian_rag_tool): An expert in deep document retrieval. It uses an advanced three-step process (Query Optimization -> Vector Search -> Cross-Encoder Re-ranking) to find the most relevant text and table chunks from the enriched 10-K filings.
+- The Librarian (librarian_rag_tool): An expert in deep document retrieval. It uses an advanced three-step process (Query Optimization -> Vector Search -> Cross-Encoder Re-ranking) to find the most relevant text and table chunks from the enriched 10-K filings.
 
-The SQL Analyst (analyst_sql_tool): A quantitative expert. This tool connects to the SQLite database and uses a LangChain SQL Agent to answer specific questions about financial metrics (e.g., "What was the total revenue in 2023?").
+- The SQL Analyst (analyst_sql_tool): A quantitative expert. This tool connects to the SQLite database and uses a LangChain SQL Agent to answer specific questions about financial metrics (e.g., "What was the total revenue in 2023?").
 
-The Trend Analyst (analyst_trend_tool): A time-series specialist. It queries the entire financial history from the SQLite database to calculate and summarize trends, such as Quarter-over-Quarter (QoQ) and Year-over-Year (YoY) growth.
+- The Trend Analyst (analyst_trend_tool): A time-series specialist. It queries the entire financial history from the SQLite database to calculate and summarize trends, such as Quarter-over-Quarter (QoQ) and Year-over-Year (YoY) growth.
 
-The Scout (scout_web_search_tool): The team's connection to the real world. It uses DuckDuckGo Search to find live, up-to-the-minute information that isn't in the static documents, such as current stock prices or breaking news.
+- The Scout (scout_web_search_tool): The team's connection to the real world. It uses DuckDuckGo Search to find live, up-to-the-minute information that isn't in the static documents, such as current stock prices or breaking news.
+</br>
 
-Phase 3: The Agentic Supervisor
+
+
+## Phase 3: The Agentic Supervisor
 This is the cognitive core of the project, implemented as a state machine using LangGraph. The Supervisor guides the agent through a sophisticated reasoning loop:
 
-The Gatekeeper: The first node in our graph. It inspects the user's query for ambiguity. If the query is too vague, it generates a clarifying question and halts. This prevents the agent from wasting resources on poorly defined tasks.
+- The Gatekeeper: The first node in our graph. It inspects the user's query for ambiguity. If the query is too vague, it generates a clarifying question and halts. This prevents the agent from wasting resources on poorly defined tasks.
 
-The Planner: Once a query is approved, the Planner creates a multi-step plan by selecting the appropriate tools in the correct sequence to answer the user's request.
+- The Planner: Once a query is approved, the Planner creates a multi-step plan by selecting the appropriate tools in the correct sequence to answer the user's request.
 
-The Tool Executor: Executes the plan step-by-step, calling the designated specialist tools.
+- The Tool Executor: Executes the plan step-by-step, calling the designated specialist tools.
 
-The Auditor: After each tool runs, this self-correction node reviews the output. It uses an LLM to score the result for relevance and consistency against the user's original query.
+- The Auditor: After each tool runs, this self-correction node reviews the output. It uses an LLM to score the result for relevance and consistency against the user's original query.
 
-The Conditional Router: The central decision-maker. Based on the Auditor's score, the router decides what to do next. If the score is high, it continues the plan. If the score is low, it triggers a re-planning loop, sending feedback to the Planner to create a new, better strategy.
+- The Conditional Router: The central decision-maker. Based on the Auditor's score, the router decides what to do next. If the score is high, it continues the plan. If the score is low, it triggers a re-planning loop, sending feedback to the Planner to create a new, better strategy.
 
-The Strategist (Synthesizer): Once all steps are successfully completed, this final node synthesizes the findings from all tool outputs into a single, comprehensive answer. Crucially, it is instructed to infer potential causal links between data points (e.g., connecting a financial trend to a documented risk) and present them as a data-grounded hypothesis.
+- The Strategist (Synthesizer): Once all steps are successfully completed, this final node synthesizes the findings from all tool outputs into a single, comprehensive answer. Crucially, it is instructed to infer potential causal links between data points (e.g., connecting a financial trend to a documented risk) and present them as a data-grounded hypothesis.
